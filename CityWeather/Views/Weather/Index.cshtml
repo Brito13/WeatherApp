@@ -1,0 +1,51 @@
+﻿@model List<WeatherCity>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WeatherApp</title>
+    <meta charset="utf-8" />
+    <link href="~/css/StyleSheet.css" rel="stylesheet"/>
+</head>
+<body>
+    <h1 class="margin-bottom">
+        Weather
+    </h1>
+
+    @{
+        string cardClass(int temp)
+        {
+            if (temp < 44)
+            {
+                return "blue-back";
+            }
+            if (temp >= 44 && temp < 70)
+            {
+                return "green-back";
+            }
+            if (temp > 74)
+            {
+                return "orange-back";
+            }
+            return null;
+        }
+    }
+    <div class="flex ">
+        @foreach (var city in Model)
+            {
+                 <div class="box @cardClass(city.TemperatureFah) w-25">
+                    <div class="flex-borderless">
+                    <div class="w-50">
+                        <h3>@city.CityName</h3>
+                        <p>@city.DateAndTime.ToShortTimeString()</p>
+                        <a href="">Details</a>
+                    </div>
+                    <div class="border-left padding-left">
+                        <h2>@city.TemperatureFah °F</h2>
+                    </div>
+                </div>
+                </div>
+            }
+        </div>
+    
+</body>
+</html>
